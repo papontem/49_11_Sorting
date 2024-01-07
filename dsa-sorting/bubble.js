@@ -62,8 +62,6 @@ function bubbleSort(arr) {
 	return arr;
 }
 
-module.exports = bubbleSort;
-
 // DEMO CODE -----------------------------------------
 // function bubbleSort(arr) {
 // Loop with i from end of array towards beginning
@@ -86,3 +84,6 @@ module.exports = bubbleSort;
 // return arr;
 // }
 // DEMO CODE -------------------------------------------
+
+module.exports = bubbleSort;
+

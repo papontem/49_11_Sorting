@@ -1,34 +1,29 @@
-/**
+/** Merge Sorting algorithm
+ * To implement Merge Sort we need two things: merging of arrays and sorting.
+ * In our implementation in js we can exploits fact that arrays of 0 or 1 element are always sorted.
+ * Its either empty or there just one element in it.
+ *  Strategy:
+ *      - Decomposing array into smaller arrays of 0 or 1 elements
+ *      - Building up a newly larger sorted array from those smaller sorted arrays
  * 
-Merge Sort
-
-    It’s a combination of two things: merging and sorting!
-    Exploits fact that arrays of 0 or 1 element are always sorted
-    Strategy:
-        Decomposing array into smaller arrays of 0 or 1 elements
-        Building up a newly sorted array from those
-
-Merging Arrays
-
-    To implement merge sort, we first need a helper function
-    This helper should take in two sorted arrays, and return a new array with all elements in sort order
-    Should run in O(n + m) time/space and be pure
-
-Merging Arrays Pseudocode
-
-    Create empty out array
-    Start pointers at beginnings of arrays a and b
-        If a value <= b value, push a value to out & increase a pointer
-        Else, push b value to out & increase b pointer
-    Once we exhaust one array, push all remaining values from other array
-
-mergeSort Pseudocode
-
-    Recursively:
-        Split array into halves until you have arrays that have length of 0 or 1
-        Merge split arrays and return the merged & sorted array
-
-
+ * lets breack this problem down into smaller pieces:
+ *   To implement Merging of Arrays we need a helper function:
+ *     - This helper should take in two sorted arrays
+ *     - Return a new array with all elements in sort order
+ *     - Should run in O(n + m) time/space, n and m being the length of the arrays, and be pure, meaning it doesn't edit inplace but returns new array
+ * 
+ * mergeArrays Pseudocode:
+ *   Create empty out array
+ *      Start pointers at beginnings of arrays a and b
+ *        If a value <= b value, push a value to out & increase a pointer
+ *        Else, push b value to out & increase b pointer
+ *   Once we exhaust one array, push all remaining values from other array
+ * 
+ * mergeSort Pseudocode:
+ * Recursively:
+ *      Split array into halves until you have arrays that have length of 0 or 1
+ *      Merge split arrays and return the merged & sorted array
+ *
  */
 
 /**
@@ -60,7 +55,7 @@ mergeSort Pseudocode
  * merge(arr5, arr6);
  * // Returns: [1, 2, 3, 4, 5]
  */
-function merge(arr1, arr2) {}
+// function merge(arr1, arr2) {}
 
 /**
  * mergeSort
@@ -98,6 +93,44 @@ function merge(arr1, arr2) {}
  * mergeSort(nums);
  * // Returns: [2, 3, 3, 4, 4, 4, 5, 23, 32, 32, 34, 34, 35, 43, 67, 75, 232, 232, 453, 546, 4342]
  */
-function mergeSort(arr) {}
+// function mergeSort(arr) {}
 
+
+// DEMO CODE ------------------------------------------------------------
+function merge(arr1, arr2) {
+    const results = [];
+	let i = 0;
+	let j = 0;
+	while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+            results.push(arr1[i]);
+			i++;
+		} else {
+            results.push(arr2[j]);
+			j++;
+		}
+	}
+	while (i < arr1.length) {
+        results.push(arr1[i]);
+		i++;
+	}
+	while (j < arr2.length) {
+        results.push(arr2[j]);
+		j++;
+	}
+    
+	return results;
+}
+
+
+function mergeSort(arr) {
+    //base case
+	if (arr.length <= 1) return arr;
+	const mid = Math.floor(arr.length / 2);
+	const left = mergeSort(arr.slice(0, mid));
+	const right = mergeSort(arr.slice(mid));
+	return merge(left, right);
+}
+
+// DEMO CODE ------------------------------------------------------------
 module.exports = { merge, mergeSort };
